@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Grand Tower</title>
+<link rel="icon" type="image/svg+xml" href="images/logo-mark.svg">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,8 +39,16 @@ button{font:inherit;color:inherit}
 .top{position:fixed;left:0;right:0;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;
   padding-top:calc(14px + env(safe-area-inset-top,0px));padding-bottom:14px;pointer-events:none}
 .top>*{pointer-events:auto}
-.brand{display:flex;flex-direction:column;gap:2px;font-weight:400;font-size:14px;letter-spacing:.01em;text-shadow:0 1px 12px rgba(0,0,0,.35)}
-.brand small{font-size:11px;opacity:.75;font-weight:300}
+.brand{display:flex;flex-direction:row;align-items:center;gap:14px;color:inherit;text-decoration:none;text-shadow:0 1px 12px rgba(0,0,0,.28)}
+.brand-mark{height:50px;width:auto;flex:none;overflow:visible;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.brand-mark .lit{filter:drop-shadow(0 0 3px rgba(242,179,74,.95)) drop-shadow(0 0 8px rgba(242,179,74,.6));animation:litPulse 4.5s ease-in-out infinite}
+@keyframes litPulse{50%{opacity:.55}}
+.brand:hover .brand-mark{transform:translateY(-2px)}
+.brand-txt{display:flex;flex-direction:column;gap:6px;line-height:1;padding-left:14px;border-left:1px solid currentColor;border-left-color:rgba(255,255,255,.35)}
+.brand-txt b{font-weight:300;font-size:16px;letter-spacing:.42em;text-transform:uppercase;margin-right:-.42em}
+.brand-txt small{font-size:10.5px;letter-spacing:.08em;opacity:.78;font-weight:300}
+@media (max-width:520px){.brand-mark{height:36px}.brand-txt{padding-left:11px}.brand-txt b{font-size:13px;letter-spacing:.3em}.brand-txt small{display:none}}
+@media (prefers-reduced-motion:reduce){.brand-mark .lit{animation:none}}
 .back{display:none;align-items:center;gap:8px;background:none;border:0;cursor:pointer;font-size:13px;text-shadow:0 1px 12px rgba(0,0,0,.5)}
 .top.in-tour .brand{display:none}.top.in-tour .back{display:inline-flex}
 .pill{border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
@@ -214,9 +223,17 @@ footer .inner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap
 </svg>
 
 <header class="top wrap" id="top">
-  <div class="brand">Grand Tower<small>Residences on 47 floors</small></div>
-  <button class="back" id="back" type="button"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M10 3 5 8l5 5"/></svg>Back to the tower</button>
-  <button class="pill" id="ask" type="button">Ask a question</button>
+  <a class="brand" href="#top" aria-label="Grand Tower, home">
+    <svg class="brand-mark" viewBox="0 0 24 56" aria-hidden="true">
+      <path d="M12 1v7M10 8h4v6h2v10h2v12h2v18H4V36h2V24h2V14h2z" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/>
+      <path d="M12 14v40" stroke="currentColor" stroke-opacity=".35" stroke-width=".8"/>
+      <path d="M1 54h22" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+      <rect class="lit" x="10.6" y="27" width="2.8" height="4.6" rx=".5" fill="#f2b34a"/>
+    </svg>
+    <span class="brand-txt"><b>Grand Tower</b><small>Residences On 47 Floors</small></span>
+  </a>
+  <button class="back" id="back" type="button"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M10 3 5 8l5 5"/></svg>Back To The Tower</button>
+  <button class="pill" id="ask" type="button">Ask A Question</button>
 </header>
 
 <main>
@@ -239,24 +256,24 @@ footer .inner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap
 
     <div class="hero wrap" id="hero">
       <h1>Grand<br>Tower</h1>
-      <p>47 floors above the city. Wake up where the clouds begin and the skyline ends.</p>
+      <p>47 Floors Above The City. Wake Up Where The Clouds Begin And The Skyline Ends.</p>
     </div>
     <div class="cue mono" id="cue"><span>Scroll</span><b></b></div>
 
     <div class="lantern wrap" id="lantern">
-      <h2>In the evening the tower becomes a lantern.</h2>
+      <h2>In The Evening The Tower Becomes A Lantern.</h2>
       <p>Every window is lit by the people who live behind it. The facade glows from the first floor to the crown.</p>
     </div>
 
     <aside class="card" id="card" aria-label="Floor selector">
-      <span class="mono">Choose your floor</span>
+      <span class="mono">Choose Your Floor</span>
       <div class="floor-row"><div class="floor-num" id="floorNum" aria-live="polite">18</div><span>Floor</span></div>
-      <div class="unit" id="unitName">Three-room apartment with loggia</div>
+      <div class="unit" id="unitName">Three-Room Apartment With Loggia</div>
       <div class="meta" id="unitMeta">94 m² · view from 68 m</div>
       <div class="plan" id="plan"></div>
       <input type="range" id="floorRange" min="5" max="45" value="18" step="1" aria-label="Floor">
       <div class="range-lbl"><span>Floor 5</span><span>Floor 45</span></div>
-      <button class="cta" id="explore" type="button">Explore apartment
+      <button class="cta" id="explore" type="button">Explore Apartment
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
     </aside>
   </div>
@@ -275,25 +292,25 @@ footer .inner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap
 <!-- ===== NEIGHBOURHOOD ===== -->
 <section class="hood-wrap" id="hoodWrap">
   <div class="hood" id="hood">
-    <span class="kicker mono">The neighbourhood</span>
+    <span class="kicker mono">The Neighbourhood</span>
     <div class="imgcard" id="hoodImg"><svg id="hoodSvg" viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice"></svg></div>
     <div class="txtcard" id="hoodTxt">
-      <h2>At the entrance to the Europe Quarter</h2>
-      <p>Grand Tower marks the gateway to the city's newest district. Parks, cafés and the main station are a short walk away, and the old town is one tram stop beyond.</p>
-      <span class="mono">Europe Avenue 2</span>
+      <h2>At The Entrance To The Indian Quarter</h2>
+      <p>Grand Tower marks the gateway to the city's newest district. Parks, cafés and the main station are a short walk away, and the old town is one metro stop beyond.</p>
+      <span class="mono">Indian Quarter Avenue 2</span>
     </div>
   </div>
 </section>
 
 <section class="sec far wrap">
   <div class="inner">
-    <h2 data-rise>The higher,<br>the farther.</h2>
+    <h2 data-rise>The Higher,<br>The Farther.</h2>
     <div class="far-grid">
       <div class="imgcard" data-rise><svg id="farSvg" viewBox="0 0 520 520" preserveAspectRatio="xMidYMid slice"></svg></div>
       <div class="stats" data-rise>
-        <div class="stat"><b><span data-count="7">7</span><small>min</small></b><span>to the central station by tram</span></div>
-        <div class="stat"><b><span data-count="141">141</span><small>m</small></b><span>height of the highest private terrace</span></div>
-        <div class="stat"><b><span data-count="172">172</span><small>m</small></b><span>to the crown of the tower</span></div>
+        <div class="stat"><b><span data-count="7">7</span><small>min</small></b><span>To The Central Station By Metro</span></div>
+        <div class="stat"><b><span data-count="141">141</span><small>m</small></b><span>Height Of The Highest Private Terrace</span></div>
+        <div class="stat"><b><span data-count="172">172</span><small>m</small></b><span>To The Crown Of The Tower</span></div>
       </div>
     </div>
   </div>
@@ -301,17 +318,17 @@ footer .inner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap
 
 <section class="sec nums wrap">
   <div class="inner">
-    <span class="mono" style="opacity:.55" data-rise>The tower in numbers</span>
+    <span class="mono" style="opacity:.55" data-rise>The Tower In Numbers</span>
     <div class="nums-grid">
       <div>
         <div class="big" data-rise><span data-count="172">172</span><small>m</small></div>
-        <div class="big big2" data-rise><span data-count="47">47</span><small>floors</small></div>
+        <div class="big big2" data-rise><span data-count="47">47</span><small>Floors</small></div>
         <p class="credit" data-rise>Designed by Halden &amp; Partners Architects. A slim, stepped silhouette with a facade that changes colour from sunrise to night.</p>
         <div class="facts" data-rise>
           <div><b>2021</b><span>Groundbreaking</span></div>
-          <div><b>2024</b><span>Topping out</span></div>
+          <div><b>2024</b><span>Topping Out</span></div>
           <div><b>238</b><span>Apartments</span></div>
-          <div><b>2026</b><span>Move-in</span></div>
+          <div><b>2026</b><span>Move-In</span></div>
         </div>
       </div>
       <div class="gal">
@@ -327,19 +344,19 @@ footer .inner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap
   <div class="tower2"><svg id="towerSvg2" viewBox="0 0 260 1000" aria-hidden="true"></svg></div>
   <div class="copy wrap">
     <div class="inner">
-      <h2 data-rise>Every floor has its own light.</h2>
+      <h2 data-rise>Every Floor Has Its Own Light.</h2>
       <p data-rise>Tell us which floor you have in mind. We will send the floor plan and the view from that height.</p>
       <form class="form" id="form" data-rise>
         <input id="fName" name="name" type="text" placeholder="Your name" autocomplete="name" required aria-label="Your name">
         <input id="fMail" name="email" type="email" placeholder="Email address" autocomplete="email" required aria-label="Email address">
-        <button class="cta" type="submit">Request info</button>
+        <button class="cta" type="submit">Request Info</button>
       </form>
       <div class="thanks" id="thanks" role="status"></div>
     </div>
   </div>
 </section>
 </main>
-<footer class="wrap"><div class="inner"><span>Grand Tower · Demo concept, not a real offer</span><span>Illustrations are generated, replace with project photography</span></div></footer>
+<footer class="wrap"><div class="inner"><span>Grand Tower · Demo Concept, Not A Real Offer</span><span>Illustrations Are Generated, Replace With Project Photography</span></div></footer>
 
 <script>
 (function(){
@@ -422,9 +439,9 @@ var cl=$('#clouds'),clouds=[];
 var rangeEl=$('#floorRange'),floorNum=$('#floorNum'),unitName=$('#unitName'),unitMeta=$('#unitMeta'),planEl=$('#plan');
 var floor=18,bandTarget=18,bandY=null;
 function unitFor(f){
-  if(f<=15)return {n:'Two-room apartment with balcony',a:68,t:0};
-  if(f<=32)return {n:'Three-room apartment with loggia',a:94,t:1};
-  return {n:'Four-room sky residence with terrace',a:132,t:2};
+  if(f<=15)return {n:'Two-Room Apartment With Balcony',a:68,t:0};
+  if(f<=32)return {n:'Three-Room Apartment With Loggia',a:94,t:1};
+  return {n:'Four-Room Sky Residence With Terrace',a:132,t:2};
 }
 function planSvg(t){
   var s='<svg viewBox="0 0 120 64" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1"><rect x="2" y="2" width="116" height="60"/>';
@@ -463,13 +480,13 @@ setFloor(18);
 /* ---------- Tour scenes (generated illustrations) ---------- */
 var ROOMS=[
  {n:'Living',m:'Approx. 38 m² · floor-to-ceiling glazing'},
- {n:'Kitchen and dining',m:'Approx. 24 m² · island with induction hob'},
+ {n:'Kitchen And Dining',m:'Approx. 24 m² · island with induction hob'},
  {n:'Loggia',m:'Approx. 9 m² · glass balustrade, evening sun'},
  {n:'Sleeping',m:'Approx. 18 m² · corner windows, blackout curtains'},
- {n:'Dressing room',m:'Approx. 8 m² · built-in shelving, indirect light'},
+ {n:'Dressing Room',m:'Approx. 8 m² · built-in shelving, indirect light'},
  {n:'Bath',m:'Approx. 9 m² · stone basin, freestanding tub'},
  {n:'Shower',m:'Approx. 5 m² · rain shower, heated floor'},
- {n:'Entrance hall',m:'Approx. 11 m² · oak floor, built-in storage'}
+ {n:'Entrance Hall',m:'Approx. 11 m² · oak floor, built-in storage'}
 ];
 /* Plan rects: x,y,w,h in 100x62 */
 var PLAN=[[2,2,40,30],[42,2,30,30],[72,2,26,30],[2,32,30,28],[32,32,18,28],[50,32,16,28],[66,32,14,28],[80,32,18,28]];
